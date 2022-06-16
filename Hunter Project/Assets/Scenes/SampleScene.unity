@@ -206,7 +206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 81
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -214,7 +214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 45
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -399,11 +399,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 90
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -602,7 +602,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -667,7 +667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 81
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -675,7 +675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -45
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -810,7 +810,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 200, y: 200}
+  m_Size: {x: 800, y: 800}
   m_AdaptiveModeThreshold: 0
   m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
@@ -1115,8 +1115,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -40
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 8218318985657856383, guid: 5b171e9bd8253c04a8ab9262d40e2bf1, type: 3}
       propertyPath: m_LocalPosition.y
