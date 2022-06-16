@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace HunterProject.Gun
 {
@@ -25,15 +27,15 @@ namespace HunterProject.Gun
             _direction = direction;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            if (collision.gameObject.CompareTag(_BORDER_TAG_) ||
-                collision.gameObject.CompareTag(_PLAYER_TAG_))
+            if (other.gameObject.CompareTag(_BORDER_TAG_) ||
+                other.gameObject.CompareTag(_PLAYER_TAG_))
             {
                 return;
             }
 
-            DestroyEnemy(collision.gameObject);
+            DestroyEnemy(other.gameObject);
             DestroyBullet(gameObject);
         }
 
