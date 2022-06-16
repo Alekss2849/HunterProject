@@ -4,13 +4,13 @@ namespace HunterProject.LevelElements
 {
     public class LevelBorder : MonoBehaviour
     {
-        private const string _BOUND_TAG_ = "Bound";
+        private const string _BORDER_TAG_ = "Border";
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (false == collision.gameObject.CompareTag(_BOUND_TAG_))
+            if (false == other.gameObject.CompareTag(_BORDER_TAG_))
             {
-                Destroy(collision.gameObject);
+                Destroy(other.gameObject);
             }
         }
     }

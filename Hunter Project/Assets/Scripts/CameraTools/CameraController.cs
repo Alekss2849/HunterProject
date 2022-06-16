@@ -13,6 +13,11 @@ namespace HunterProject.CameraTools
 
         private void FollowPlayer()
         {
+            if (_player == null)
+            {
+                return;
+            }
+            
             transform.position = new Vector3(_player.position.x, 
                                              _player.position.y, 
                                              transform.position.z);
