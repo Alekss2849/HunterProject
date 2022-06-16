@@ -4,6 +4,7 @@ namespace HunterProject.Gun
 {
     public class Gun : MonoBehaviour
     {
+        [SerializeField] private Transform _bulletSpawnPoint;
         [SerializeField] private BulletCountLabel _bulletCountLabel;
         [SerializeField] private int _bulletCount;
         [SerializeField] private Bullet _bulletPrefab;
@@ -27,17 +28,11 @@ namespace HunterProject.Gun
 
         private float GetAimAngle()
         {
-            Vector2 mousePos = GetMouseWorldPosition();
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _aimDirection = (mousePos - (Vector2) transform.position).normalized;
             float angle = Mathf.Atan2(_aimDirection.y, _aimDirection.x) * Mathf.Rad2Deg;
 
             return angle;
-        }
-
-        private Vector2 GetMouseWorldPosition()
-        {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            return mousePos;
         }
 
         public void Shoot()
@@ -47,9 +42,9 @@ namespace HunterProject.Gun
                 return;
             }
 
-            Bullet bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation);
+            Bullet bullet = Instantiate(_bulletPrefab, _bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
             bullet.SetDirection(_aimDirection);
-            
+
             _bulletCount--;
             _bulletCountLabel.SetBulletCount(_bulletCount);
         }

@@ -4,7 +4,7 @@ namespace HunterProject.Gun
 {
     public class Bullet : MonoBehaviour
     {
-        private const string _BOUND_TAG_ = "Bound";
+        private const string _BORDER_TAG_ = "Border";
         private const string _PLAYER_TAG_ = "Player";
 
         [SerializeField] private float _speed;
@@ -27,7 +27,7 @@ namespace HunterProject.Gun
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.CompareTag(_BOUND_TAG_) ||
+            if (collision.gameObject.CompareTag(_BORDER_TAG_) ||
                 collision.gameObject.CompareTag(_PLAYER_TAG_))
             {
                 return;
