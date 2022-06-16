@@ -27,7 +27,7 @@ namespace DefaultNamespace
         private void Update()
         {
             _wolfController.UpdateState();
-            transform.position += _wolfController.GetNextMovePoint(transform.position);
+            transform.position += _wolfController.GetSteeringVelocity(transform.position) * Time.deltaTime;
         }
         
         private void OnCollisionEnter2D(Collision2D collision)

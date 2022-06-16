@@ -33,7 +33,7 @@ namespace DefaultNamespace
             while (true)
             {
                 _deerHerdController.UpdateMovePoint();
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(.3f);
             }
         }
     }

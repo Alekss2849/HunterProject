@@ -27,7 +27,7 @@ namespace DefaultNamespace
         private void Update()
         {
             _rabbitController.UpdateState();
-            transform.position += _rabbitController.GetNextMovePoint(transform.position);
+            transform.position += _rabbitController.GetSteeringVelocity(transform.position) * Time.deltaTime;
         }
     }
 }

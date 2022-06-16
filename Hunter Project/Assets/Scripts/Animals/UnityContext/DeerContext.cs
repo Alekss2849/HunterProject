@@ -30,10 +30,10 @@ namespace DefaultNamespace
             switch (_deerController.GetState())
             {
                 case AnimalState.Run:
-                    transform.position += _deerController.GetRunPosition(transform.position);
+                    transform.position += _deerController.GetRunSteeringVelocity(transform.position) * Time.deltaTime;
                     break;
                 case AnimalState.Walk:
-                    transform.position = _deerController.GetWalkPosition(transform.position);
+                    transform.position += _deerController.GetWalkSteeringVelocity(transform.position) * Time.deltaTime;
                     break;
             }
         }
