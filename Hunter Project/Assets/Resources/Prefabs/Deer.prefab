@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 4218021015525941562}
   - component: {fileID: 4218021015525941560}
   - component: {fileID: 4218021015525941566}
-  - component: {fileID: 5544690378605689922}
   m_Layer: 0
   m_Name: Deer
   m_TagString: Untagged
@@ -161,7 +160,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4218021015525941567}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8307861d98847b4b23a3097b164a491, type: 3}
   m_Name: 
@@ -172,17 +171,3 @@ MonoBehaviour:
   _movementProperties:
     Speed: 5
     LookRadius: 20
---- !u!114 &5544690378605689922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4218021015525941567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2958a8e9ebf4b5dae44919794f1c870, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 5
-  LookRadius: 20

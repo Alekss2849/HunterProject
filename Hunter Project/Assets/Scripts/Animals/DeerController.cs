@@ -30,17 +30,19 @@ namespace HunterProject.Animals
             deerHerd.ChangeTargetEvent += UpdateMovePoint;
         }
         
-        public Vector3 GetNextMovePoint(Vector3 currentPosition)
+        public Vector3 GetRunPosition(Vector3 currentPosition)
         {
-            switch (_currentState)
-            {
-                case AnimalState.Run:
-                    return -1 * _movementProperties.Speed * 2 * Time.deltaTime * (target - currentPosition).normalized; 
-                case AnimalState.Walk:
-                    return Vector2.MoveTowards(currentPosition, _movePoint, _movementProperties.Speed * Time.deltaTime);
-            }
+            return -1 * _movementProperties.Speed * 2 * Time.deltaTime * (target - currentPosition).normalized; 
+        }
+        
+        public Vector3 GetWalkPosition(Vector3 currentPosition)
+        {
+            return Vector2.MoveTowards(currentPosition, _movePoint, _movementProperties.Speed * Time.deltaTime);
+        }
 
-            return Vector3.zero;
+        public AnimalState GetState()
+        {
+            return _currentState;
         }
        
         public void UpdateState()

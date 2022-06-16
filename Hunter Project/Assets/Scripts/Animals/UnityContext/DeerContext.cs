@@ -20,8 +20,22 @@ namespace DefaultNamespace
 
         private void Update()
         {
+            if (_deerController == null)
+            {
+                return;
+            }
+            
             _deerController.UpdateState();
-            transform.position += _deerController.GetNextMovePoint(transform.position);
+            
+            switch (_deerController.GetState())
+            {
+                case AnimalState.Run:
+                    transform.position += _deerController.GetRunPosition(transform.position);
+                    break;
+                case AnimalState.Walk:
+                    transform.position = _deerController.GetWalkPosition(transform.position);
+                    break;
+            }
         }
 
         public void Init()
