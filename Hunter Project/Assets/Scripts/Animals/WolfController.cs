@@ -19,7 +19,7 @@ namespace HunterProject.Animals
         private const float _MOVE_POINT_REACH_TOLERANCE_ = 3f;
 
         private const string _WOLF_TAG_ = "Wolf";
-        private const string _BORDER_TAG_ = "Bound";
+        private const string _BORDER_TAG_ = "Border";
         
         public WolfController(ContextData contextData, MovementProperties movementProperties, float searchDistance)
         {
@@ -43,7 +43,7 @@ namespace HunterProject.Animals
 
         public void UpdateState()
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(_movementProperties.Transform.position, _movementProperties.LookRadius)
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(_context.Transform.position, _movementProperties.LookRadius)
                 .Where(x => x.CompareTag(_WOLF_TAG_) == false && x.CompareTag(_BORDER_TAG_) == false).ToArray();
             
             if (colliders.Length == 0)

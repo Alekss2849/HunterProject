@@ -16,7 +16,7 @@ namespace DefaultNamespace
 
         private WolfController _wolfController;
         
-        private const string _BORDER_TAG_ = "Bound";
+        private const string _BORDER_TAG_ = "Border";
 
         public void Start()
         {

@@ -31,7 +31,8 @@ namespace HunterProject.Animals
                     Random.Range(-_spawnDistance, _spawnDistance), 0);
                 
                 position += spawnThreshold;
-                DeerContext deer = Object.Instantiate(prefab, position, Quaternion.identity);//делаем нового оленя
+                DeerContext deer = Object.Instantiate(prefab, position, Quaternion.identity);
+                deer.Init();
                 deer.BindHerd(this);
             }
         }

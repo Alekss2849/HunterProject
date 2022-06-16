@@ -42,7 +42,7 @@ namespace HunterProject.Animals
 
         public void UpdateState()
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(_movementProperties.Transform.position, _movementProperties.LookRadius);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(_context.Transform.position, _movementProperties.LookRadius);
             
             if (colliders.Length <= 1)
             {

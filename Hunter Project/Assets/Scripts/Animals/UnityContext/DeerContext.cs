@@ -15,14 +15,18 @@ namespace DefaultNamespace
 
         private void Start()
         {
-            _deerController = new DeerController(_contextData, _movementProperties);
-            _deerController.UpdateState();
+            _deerController?.UpdateState();
         }
 
         private void Update()
         {
             _deerController.UpdateState();
             transform.position += _deerController.GetNextMovePoint(transform.position);
+        }
+
+        public void Init()
+        {
+            _deerController = new DeerController(_contextData, _movementProperties);
         }
 
         public void BindHerd(DeerHerdController deerHerd)

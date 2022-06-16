@@ -27,7 +27,7 @@ namespace HunterProject.Animals
         
         public void Bind(DeerHerdController deerHerd)
         {
-            deerHerd.ChangeTargetEvent += UpdateMovePoint;//если у группы меняется цель и у конкретного оленя меняется цель
+            deerHerd.ChangeTargetEvent += UpdateMovePoint;
         }
         
         public Vector3 GetNextMovePoint(Vector3 currentPosition)
