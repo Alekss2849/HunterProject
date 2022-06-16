@@ -73,6 +73,21 @@ namespace HunterProject.Animals
             else
             {
                 UpdateTargetPosition(colliders);
+                AvoidBorders();
+            }
+        }
+
+        private void AvoidBorders()
+        {
+            RaycastHit2D[] hits = Physics2D.RaycastAll(_context.Transform.position, (_context.Transform.position - _targetPosition).normalized, _movementProperties.LookRadius);
+
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.collider.gameObject.CompareTag("Border"))
+                {
+                    _targetPosition = hit.point;
+                    _currentState = AnimalState.Run;
+                }
             }
         }
 
