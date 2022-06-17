@@ -5,7 +5,7 @@ namespace HunterProject.Animals
 {
     public abstract class AnimalController : IAnimalController
     {
-        private AnimalState CurrentState;
+        protected AnimalState CurrentState;
         protected Vector3 Velocity;
         
         private const float _MOVE_POINT_REACH_SQR_TOLERANCE_ = .3f;

@@ -15,8 +15,6 @@ namespace HunterProject.Animals
         private Vector3 _targetPosition;
         private Vector3 _movePoint;
 
-        private const float _MOVE_POINT_REACH_TOLERANCE_ = .3f;
-
         public WolfController(Transform transform, MovementProperties movementProperties, float searchDistance)
         {
             _movementProperties = movementProperties;

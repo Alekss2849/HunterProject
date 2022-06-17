@@ -12,8 +12,6 @@ namespace HunterProject.Animals
         private readonly MovementProperties _movementProperties;
         private readonly float _walkRadius;
 
-        private AnimalState _currentState;
-
         private Vector3 _targetPosition;
         private Vector3 _movePoint;
 
@@ -32,7 +30,7 @@ namespace HunterProject.Animals
 
         private Vector3 GetSteeringVelocity(Vector3 currentPosition)
         {
-            switch (_currentState)
+            switch (CurrentState)
             {
                 case AnimalState.Run:
                     return GetSteeringVelocity(_movementProperties.RunSpeed, _movementProperties.SlowdownDistance, currentPosition, _targetPosition);
@@ -52,12 +50,12 @@ namespace HunterProject.Animals
             if (hits.Length == 0)
             {
                 _movePoint = GetWalkPoint(transform.position, _movePoint, _walkRadius);
-                _currentState = AnimalState.Walk;
+                CurrentState = AnimalState.Walk;
                 return;
             }
             
             _targetPosition = GetEscapePoint(transform.position, hits, _movementProperties.RunSpeed);
-            _currentState = AnimalState.Run;
+            CurrentState = AnimalState.Run;
         }
     }
 }
