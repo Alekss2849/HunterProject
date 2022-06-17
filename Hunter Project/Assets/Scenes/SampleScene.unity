@@ -847,16 +847,52 @@ PrefabInstance:
       objectReference: {fileID: 7118139766717951283, guid: 83a5d2b6855142746a91f270bb3b7c62, type: 3}
     - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
       propertyPath: _wolfCount
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
       propertyPath: _rabbitCount
-      value: 30
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
       propertyPath: rabbitPrefab
       value: 
       objectReference: {fileID: 8247463633569198411, guid: 31bee226a3a272e4e9c7cfc755adcc17, type: 3}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _deerPerHerdCount.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _deerPerHerdCount.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _deerPerHerdCount.Array.data[8]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _deerPerHerdCount.Array.data[9]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _deerPerHerdCount.Array.data[10]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _deerPerHerdCount.Array.data[11]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _deerPerHerdCount.Array.data[12]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _deerPerHerdCount.Array.data[13]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _deerPerHerdCount.Array.data[14]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4708235763569993529, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
       propertyPath: m_RootOrder
       value: 6

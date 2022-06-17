@@ -85,8 +85,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementProperties:
     WalkSpeed: 7
-    RunSpeed: 15
-    SlowdownDistance: 0.4
+    RunSpeed: 16
+    SlowdownDistance: 0.2
     LookRadius: 20
   _walkDistance: 40
 --- !u!1 &2793979388800686794
