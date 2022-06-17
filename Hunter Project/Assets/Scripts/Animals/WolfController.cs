@@ -1,101 +1,82 @@
 ﻿using System.Linq;
 using HunterProject.Animals.Data;
+using HunterProject.Data;
 using UnityEngine;
 
 namespace HunterProject.Animals
 {
     public class WolfController : AnimalController
     {
+        private readonly Transform _transform;
         private readonly MovementProperties _movementProperties;
-        private readonly float _searchDistance;
-        private Transform _transform;
-
-        private AnimalState _currentState;
+        private readonly float _walkRadius;
 
         private Vector3 _targetPosition;
         private Vector3 _movePoint;
 
-        public WolfController(Transform transform, MovementProperties movementProperties, float searchDistance)
+        private const float _BORDER_RESTRICT_DISTANCE_ = 5;
+
+        public WolfController(Transform transform, MovementProperties movementProperties, float walkRadius)
         {
             _movementProperties = movementProperties;
-            _searchDistance = searchDistance;
+            _walkRadius = walkRadius;
             _transform = transform;
         }
-
-        public Vector3 GetSteeringVelocity(Vector3 currentPosition)
+        
+        public override void Update()
         {
-            switch (_currentState)
+             UpdateState(_transform);
+             _transform.position += GetSteeringVelocity(_transform.position) * Time.deltaTime;
+        }
+
+        private Vector3 GetSteeringVelocity(Vector3 currentPosition)
+        {
+            switch (CurrentState)
             {
                 case AnimalState.Run:
                     // Debug.DrawLine(currentPosition, _targetPosition, Color.red);
-                    return GetSteeringVelocity(_movementProperties.WalkSpeed, _movementProperties.SlowdownDistance, currentPosition, _targetPosition);
+                    return GetSteeringVelocity(_movementProperties.RunSpeed, _movementProperties.SlowdownDistance, currentPosition, _targetPosition);
                 case AnimalState.Walk:
                     // Debug.DrawLine(currentPosition, _movePoint, Color.blue);
-                    return GetSteeringVelocity(_movementProperties.WalkSpeed / 2, _movementProperties.SlowdownDistance, currentPosition, _movePoint);
+                    return GetSteeringVelocity(_movementProperties.WalkSpeed, _movementProperties.SlowdownDistance, currentPosition, _movePoint);
             }
 
             return Vector3.zero;
         }
 
-        public void UpdateState()
+        public void UpdateState(Transform transform)
         {
-            // var hits = Physics2D.CircleCastAll()
-            // // Collider2D[] colliders = Physics2D.OverlapCircleAll(_context.Transform.position, _movementProperties.LookRadius)
-            // //                                   .Where(x => x.CompareTag(_WOLF_TAG_) == false && x.CompareTag(_BORDER_TAG_) == false)
-            // //                                   .ToArray();
-            //
-            // if (colliders.Length == 0)
-            // {
-            //     UpdateMovePoint();
-            // }
-            // else
-            // {
-            //     UpdateTargetPosition(colliders);
-            //     AvoidBorders();
-            // }
-        }
-        //
-        // private void AvoidBorders()
-        // {
-        //     RaycastHit2D[] hits = Physics2D.RaycastAll(_context.Transform.position, (_targetPosition - _context.Transform.position).normalized, _movementProperties.LookRadius);
-        //
-        //     foreach (RaycastHit2D hit in hits)
-        //     {
-        //         if (hit.collider.gameObject.CompareTag("Border"))
-        //         {
-        //             _targetPosition = hit.point;
-        //             _currentState = AnimalState.Run;
-        //         }
-        //     }
-        // }
+            var currentPosition = (Vector2) transform.position;
 
-        // private void UpdateMovePoint()
-        // {
-        //     if (_movePoint == Vector3.zero || Vector2.Distance(_movePoint, _context.Transform.position) < _MOVE_POINT_REACH_TOLERANCE_)
-        //     {
-        //         _movePoint = GetRandomPoint();
-        //     }
-        //     
-        //     _currentState = AnimalState.Walk;
-        // }
+            var allHits = Physics2D.CircleCastAll(currentPosition, _movementProperties.LookRadius, Vector2.zero)
+                .Where(hit => hit.collider.transform != transform).ToArray();
+            
+            var targetHits = allHits
+                .Where(hit => !hit.collider.CompareTag(Idents._WOLF_TAG) && !hit.collider.CompareTag(Idents._BORDER_TAG))
+                .Select(hit => hit.point).ToArray();
+            
+            if (targetHits.Length == 0)
+            {
+                _movePoint = GetWalkPoint(transform.position, _movePoint, _walkRadius);
+                CurrentState = AnimalState.Walk;
+                return;
+            }
+            
+            var escapeHits = Physics2D.CircleCastAll(currentPosition, _BORDER_RESTRICT_DISTANCE_, Vector2.zero)
+                .Where(hit => hit.collider.CompareTag(Idents._BORDER_TAG)).Select(hit => hit.point).ToArray();
+            
+            var escapeDirection = (GetEscapePoint(currentPosition, escapeHits, _movementProperties.RunSpeed) - currentPosition).normalized;
+            var target = (GetClosestTarget(currentPosition, targetHits) - currentPosition).normalized;
 
-        // private void UpdateTargetPosition(Collider2D[] colliders)
-        // {
-        //     _targetPosition = colliders.OrderBy(x => Vector2.Distance(x.transform.position, _context.Transform.position))
-        //                                .First().transform.position;
-        //     _currentState = AnimalState.Run;
-        // }
-
-        private Vector2 GetRandomPoint()
-        {
-            return new Vector2(
-                Random.Range(-_searchDistance, _searchDistance),
-                Random.Range(-_searchDistance, _searchDistance));
+            _targetPosition = currentPosition + (escapeDirection + target).normalized * _movementProperties.RunSpeed;
+            
+            CurrentState = AnimalState.Run;
         }
 
-        public override void Update()
+        private Vector2 GetClosestTarget(Vector2 currentPosition, Vector2[] enemyPoints)
         {
-            throw new System.NotImplementedException();
+            return enemyPoints.OrderBy(x => (x - currentPosition).sqrMagnitude)
+                                       .First();
         }
     }
 }

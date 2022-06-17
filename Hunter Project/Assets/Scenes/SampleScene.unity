@@ -847,11 +847,11 @@ PrefabInstance:
       objectReference: {fileID: 7118139766717951283, guid: 83a5d2b6855142746a91f270bb3b7c62, type: 3}
     - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
       propertyPath: _wolfCount
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
       propertyPath: _rabbitCount
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
       propertyPath: rabbitPrefab

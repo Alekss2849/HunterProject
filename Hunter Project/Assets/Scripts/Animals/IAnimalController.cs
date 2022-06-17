@@ -1,6 +1,4 @@
-﻿using UnityEngine.PlayerLoop;
-
-namespace HunterProject.Animals
+﻿namespace HunterProject.Animals
 {
     public interface IAnimalController
     {
