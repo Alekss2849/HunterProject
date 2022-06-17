@@ -32,14 +32,11 @@ namespace HunterProject.Animals
             
             for (int i = 0; i != enemyPositions.Length; ++i)
             {
-                Debug.DrawLine(currentPos, enemyPositions[i], Color.red);
                 var direction = enemyPositions[i] - currentPos;
 
                 sum += direction.normalized;
             }
             
-            Debug.DrawLine(currentPos, currentPos - sum * speed, Color.cyan);
-
             return currentPos - sum * speed;
         }
 

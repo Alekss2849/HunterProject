@@ -85,10 +85,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementProperties:
     WalkSpeed: 7
-    RunSpeed: 12
+    RunSpeed: 15
     SlowdownDistance: 0.4
     LookRadius: 20
-  _searchDistance: 50
+  _walkDistance: 40
 --- !u!1 &2793979388800686794
 GameObject:
   m_ObjectHideFlags: 0
