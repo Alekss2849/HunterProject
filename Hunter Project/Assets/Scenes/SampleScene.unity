@@ -841,6 +841,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnController
       objectReference: {fileID: 0}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _wolfCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708235763569993528, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
+      propertyPath: _rabbitCount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4708235763569993529, guid: b866667cfc9edbd43b9908b07f02b2b3, type: 3}
       propertyPath: m_RootOrder
       value: 6

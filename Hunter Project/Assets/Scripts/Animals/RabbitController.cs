@@ -20,6 +20,7 @@ namespace HunterProject.Animals
         private Vector3 _velocity;
 
         private const float _MOVE_POINT_REACH_TOLERANCE_ = .3f;
+        private const string _BORDER_TAG_ = "Border";
 
         public RabbitController(ContextData contextData, MovementProperties movementProperties, float searchDistance)
         {
@@ -33,9 +34,11 @@ namespace HunterProject.Animals
             switch (_currentState)
             {
                 case AnimalState.Run:
+                    Debug.DrawLine(currentPosition, _targetPosition, Color.red);
                     return GetSteeringVelocity(-_movementProperties.Speed, _movementProperties.SlowdownDistance, currentPosition, _targetPosition);
 
                 case AnimalState.Walk:
+                    Debug.DrawLine(currentPosition, _movePoint, Color.blue);
                     return GetSteeringVelocity(_movementProperties.Speed / 2, _movementProperties.SlowdownDistance, currentPosition, _movePoint);
             }
 
@@ -91,20 +94,29 @@ namespace HunterProject.Animals
 
         private void UpdateTargetPosition(Collider2D[] colliders)
         {
-            _targetPosition = colliders
-                              .OrderBy(x => Vector2.Distance(x.transform.position, _context.Transform.position))
-                              .First().transform.position;
+            var arr = colliders
+                .Where(x => !x.CompareTag(_BORDER_TAG_)).ToArray();
+
+            if (arr.Length == 0)
+            {
+                return;
+            }
+                
+            _targetPosition = arr
+                .OrderBy(x => Vector2.Distance(x.transform.position, _context.Transform.position))
+                .First().transform.position;
             _currentState = AnimalState.Run;
         }
 
         private void UpdateMovePoint()
         {
-            if (Vector2.Distance(_movePoint, _context.Transform.position) < _MOVE_POINT_REACH_TOLERANCE_ ||
+            if (_currentState == AnimalState.Run || Vector2.Distance(_movePoint, _context.Transform.position) < _MOVE_POINT_REACH_TOLERANCE_ ||
                 _movePoint == Vector3.zero)
             {
                 _movePoint = GetRandomPoint();
-                _currentState = AnimalState.Walk;
             }
+            
+            _currentState = AnimalState.Walk;
         }
 
         private Vector2 GetRandomPoint()

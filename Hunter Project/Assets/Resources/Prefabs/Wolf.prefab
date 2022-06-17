@@ -65,7 +65,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -87,7 +87,8 @@ MonoBehaviour:
     GameObject: {fileID: 2793979388161266666}
     Transform: {fileID: 2793979388161266662}
   _movementProperties:
-    Speed: 7
+    Speed: 14
+    SlowdownDistance: 2
     LookRadius: 20
   _searchDistance: 50
 --- !u!1 &2793979388800686794

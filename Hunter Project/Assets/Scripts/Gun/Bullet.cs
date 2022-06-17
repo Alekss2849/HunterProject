@@ -27,7 +27,19 @@ namespace HunterProject.Gun
             _direction = direction;
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        // private void OnCollisionEnter2D(Collision2D other)
+        // {
+        //     if (other.gameObject.CompareTag(_BORDER_TAG_) ||
+        //         other.gameObject.CompareTag(_PLAYER_TAG_))
+        //     {
+        //         return;
+        //     }
+        //
+        //     DestroyEnemy(other.gameObject);
+        //     DestroyBullet(gameObject);
+        // }
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.CompareTag(_BORDER_TAG_) ||
                 other.gameObject.CompareTag(_PLAYER_TAG_))

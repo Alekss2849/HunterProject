@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HunterProject.Animals
 {
-    public class DeerController
+    public class DeerController : Animal
     {
         private readonly MovementProperties _movementProperties;
         private readonly ContextData _context;
@@ -13,7 +13,6 @@ namespace HunterProject.Animals
 
         private Vector3 _movePoint;
         private Vector3 _targetPosition;
-        private Vector3 _velocity;
 
         private const string _WOLF_TAG_ = "Wolf";
         private const string _PLAYER_TAG_ = "Player";
@@ -37,22 +36,6 @@ namespace HunterProject.Animals
         public Vector3 GetWalkSteeringVelocity(Vector3 currentPosition)
         {
             return GetSteeringVelocity(_movementProperties.Speed, _movementProperties.SlowdownDistance, currentPosition, _movePoint);
-        }
-
-        private Vector3 GetSteeringVelocity(float speed, float slowdownDistance, Vector3 currentPosition, Vector3 targetPosition)
-        {
-            Vector3 distanceToTarget = targetPosition - currentPosition;
-            Vector3 targetDirection = distanceToTarget.normalized;
-            Vector3 desiredVelocity = targetDirection * speed;
-            Vector3 steering = desiredVelocity - _velocity;
-
-            _velocity += steering * Time.deltaTime;
-
-            float slowDownFactor = Mathf.Clamp01(distanceToTarget.magnitude / slowdownDistance);
-            _velocity *= slowDownFactor;
-            _velocity.z = 0;
-
-            return _velocity;
         }
         
         public AnimalState GetState()
