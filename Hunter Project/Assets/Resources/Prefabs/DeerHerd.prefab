@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7118139766717951283}
   m_Layer: 0
   m_Name: DeerHerd
-  m_TagString: Untagged
+  m_TagString: Deer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,9 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d5594578ff46379622445051d039c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contextData:
-    GameObject: {fileID: 7118139766717951282}
-    Transform: {fileID: 7118139766717951284}
   _prefab: {fileID: 4218021015525941566, guid: cd7665d0d5d67c946af9b9c423e907db, type: 3}
-  _maxDistance: 90
+  _walkRadius: 40
   _maxSpawnDistance: 5
+  _movementProperties:
+    WalkSpeed: 6
+    RunSpeed: 10
+    SlowdownDistance: 0.01
+    LookRadius: 30

@@ -6,7 +6,7 @@ namespace HunterProject.Animals
     public class AnimalSpawnController : MonoBehaviour
     {
         [SerializeField]
-        private DeerHerdUnity _deerHerd;
+        private HerdBrainUnity _herdBrain;
         [SerializeField]
         private int[] _deerPerHerdCount;
 
@@ -34,8 +34,8 @@ namespace HunterProject.Animals
         {
             for (int i = 0; i != herds.Length; ++i)
             {
-                var herd = Instantiate(_deerHerd, GetRandomSpawnPoint(), Quaternion.identity);
-                herd.StartSpawn(herds[i]);
+                var herd = Instantiate(_herdBrain, GetRandomSpawnPoint(), Quaternion.identity);
+                herd.Init(herds[i]);
             }
         }
         

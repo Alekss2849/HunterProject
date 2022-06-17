@@ -11,39 +11,16 @@ namespace DefaultNamespace
 
         private DeerController _deerController;
 
-        private void Start()
-        {
-            _deerController?.UpdateState();
-        }
-
-        private void Update()
-        {
-            if (_deerController == null)
-            {
-                return;
-            }
-            
-            _deerController.UpdateState();
-            
-            switch (_deerController.GetState())
-            {
-                case AnimalState.Run:
-                    transform.position += _deerController.GetRunSteeringVelocity(transform.position) * Time.deltaTime;
-                    break;
-                case AnimalState.Walk:
-                    transform.position += _deerController.GetWalkSteeringVelocity(transform.position) * Time.deltaTime;
-                    break;
-            }
-        }
-
-        public void Init()
+        public DeerController Init()
         {
             _deerController = new DeerController(transform, _movementProperties);
+
+            return _deerController;
         }
 
-        public void BindHerd(DeerHerdController deerHerd)
+        private void OnDestroy()
         {
-            _deerController.Bind(deerHerd);
+            _deerController.OnDestroy();
         }
     }
 }

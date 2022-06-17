@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4218021015525941566}
   m_Layer: 0
   m_Name: Deer
-  m_TagString: Untagged
+  m_TagString: Deer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementProperties:
-    WalkSpeed: 6
-    RunSpeed: 10
+    WalkSpeed: 10
+    RunSpeed: 14
     SlowdownDistance: 1
-    LookRadius: 20
+    LookRadius: 2
