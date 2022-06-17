@@ -9,29 +9,29 @@ namespace HunterProject.Animals
 {
     public class DeerHerdController
     {
-        private readonly ContextData _contextData;
+        private Transform _transform;
         private readonly float _searchDistance;
         private readonly float _spawnDistance;
         
         public event Action<Vector3> ChangeTargetEvent;
 
-        public DeerHerdController(ContextData contextData, float searchDistance, float spawnDistance)
+        public DeerHerdController(Transform transform, float searchDistance, float spawnDistance)
         {
-            _contextData = contextData;
+            _transform = transform;
             _searchDistance = searchDistance;
             _spawnDistance = spawnDistance;
         }
 
-        public void SpawnDeers(DeerContext prefab, int count)
+        public void SpawnDeers(DeerUnity prefab, int count)
         {
-            var position = _contextData.Transform.position;
+            var position = _transform.position;
             for (int i = 0; i < count; i++)
             {
                 Vector3 spawnThreshold = new Vector3(Random.Range(-_spawnDistance, _spawnDistance), 
                     Random.Range(-_spawnDistance, _spawnDistance), 0);
                 
                 position += spawnThreshold;
-                DeerContext deer = Object.Instantiate(prefab, position, Quaternion.identity);
+                DeerUnity deer = Object.Instantiate(prefab, position, Quaternion.identity);
                 deer.Init();
                 deer.BindHerd(this);
             }

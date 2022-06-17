@@ -6,17 +6,17 @@ namespace HunterProject.Animals
     public class AnimalSpawnController : MonoBehaviour
     {
         [SerializeField]
-        private DeerHerdContext _deerHerd;
+        private DeerHerdUnity _deerHerd;
         [SerializeField]
         private int[] _deerPerHerdCount;
 
         [SerializeField]
-        private RabbitContext _rabbit;
+        private RabbitUnity rabbitPrefab;
         [SerializeField]
         private int _rabbitCount;
         
         [SerializeField]
-        private WolfContext _wolf;
+        private WolfUnity _wolf;
         [SerializeField]
         private int _wolfCount;
 
@@ -43,7 +43,7 @@ namespace HunterProject.Animals
         {
             for (int i = 0; i != count; ++i)
             {
-                Instantiate(_rabbit, GetRandomSpawnPoint(), Quaternion.identity);
+                Instantiate(rabbitPrefab, GetRandomSpawnPoint(), Quaternion.identity);
             }
         }
 

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deerHerd: {fileID: 7118139766717951283, guid: 83a5d2b6855142746a91f270bb3b7c62, type: 3}
   _deerPerHerdCount: 0500000004000000030000000300000006000000030000000600000005000000
-  _rabbit: {fileID: 8247463633569198411, guid: 31bee226a3a272e4e9c7cfc755adcc17, type: 3}
+  rabbitPrefab: {fileID: 8247463633569198411, guid: 31bee226a3a272e4e9c7cfc755adcc17, type: 3}
   _rabbitCount: 10
   _wolf: {fileID: 2793979388161266667, guid: 4539ecc7c3380904ba509659c7a34b85, type: 3}
   _wolfCount: 2

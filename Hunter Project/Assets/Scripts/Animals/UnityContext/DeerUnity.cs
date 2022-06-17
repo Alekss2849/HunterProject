@@ -4,10 +4,8 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class DeerContext : MonoBehaviour
+    public class DeerUnity : MonoBehaviour
     {
-        [SerializeField]
-        private ContextData _contextData;
         [SerializeField]
         private MovementProperties _movementProperties;
 
@@ -40,7 +38,7 @@ namespace DefaultNamespace
 
         public void Init()
         {
-            _deerController = new DeerController(_contextData, _movementProperties);
+            _deerController = new DeerController(transform, _movementProperties);
         }
 
         public void BindHerd(DeerHerdController deerHerd)

@@ -1,16 +1,13 @@
 ﻿using System.Collections;
 using HunterProject.Animals;
-using HunterProject.Animals.Data;
 using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class DeerHerdContext : MonoBehaviour
+    public class DeerHerdUnity : MonoBehaviour
     {
         [SerializeField]
-        private ContextData _contextData;
-        [SerializeField]
-        private DeerContext _prefab;
+        private DeerUnity _prefab;
     
         [SerializeField]
         private int _maxDistance;
@@ -22,7 +19,7 @@ namespace DefaultNamespace
         
         public void StartSpawn( int count)
         {
-            _deerHerdController = new DeerHerdController(_contextData, _maxDistance, _maxSpawnDistance);
+            _deerHerdController = new DeerHerdController(transform, _maxDistance, _maxSpawnDistance);
             _deerHerdController.SpawnDeers(_prefab, count);
             _deerHerdController.UpdateMovePoint();
             StartCoroutine(MovePointUpdater());

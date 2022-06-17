@@ -1,14 +1,11 @@
-﻿using System;
-using HunterProject.Animals;
+﻿using HunterProject.Animals;
 using HunterProject.Animals.Data;
 using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class WolfContext : MonoBehaviour
+    public class WolfUnity : MonoBehaviour
     {
-        [SerializeField]
-        private ContextData _contextData;
         [SerializeField]
         private MovementProperties _movementProperties;
 
@@ -22,7 +19,7 @@ namespace DefaultNamespace
 
         public void Start()
         {
-            _wolfController = new WolfController(_contextData, _movementProperties, _searchDistance);
+            _wolfController = new WolfController(transform, _movementProperties, _searchDistance);
             _wolfController.UpdateState();
         }
 
@@ -31,6 +28,7 @@ namespace DefaultNamespace
             _wolfController.UpdateState();
             transform.position += _wolfController.GetSteeringVelocity(transform.position) * Time.deltaTime;
         }
+        
         //
         // private void OnCollisionEnter2D(Collision2D collision)
         // {

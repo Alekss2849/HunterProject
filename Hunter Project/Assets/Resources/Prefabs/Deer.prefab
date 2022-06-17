@@ -165,10 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8307861d98847b4b23a3097b164a491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contextData:
-    GameObject: {fileID: 4218021015525941567}
-    Transform: {fileID: 4218021015525941563}
   _movementProperties:
-    Speed: 5
+    WalkSpeed: 6
+    RunSpeed: 10
     SlowdownDistance: 1
     LookRadius: 20
