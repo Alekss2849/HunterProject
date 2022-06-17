@@ -7,8 +7,16 @@ namespace HunterProject.Animals
     {
         protected AnimalState CurrentState;
         protected Vector3 Velocity;
+        protected readonly Transform Transform;
+        protected readonly MovementProperties MovementProperties;
         
         private const float _MOVE_POINT_REACH_SQR_TOLERANCE_ = .3f;
+
+        protected AnimalController(Transform transform, MovementProperties movementProperties)
+        {
+            Transform = transform;
+            MovementProperties = movementProperties;
+        }
         
         protected Vector3 GetSteeringVelocity(float speed, float slowdownDistance, Vector3 currentPosition, Vector3 targetPosition)
         {

@@ -8,24 +8,20 @@ namespace HunterProject.Animals
 {
     public class RabbitController : AnimalController
     {
-        private readonly Transform _transform;
-        private readonly MovementProperties _movementProperties;
         private readonly float _walkRadius;
 
         private Vector3 _targetPosition;
         private Vector3 _movePoint;
 
-        public RabbitController(Transform transform, MovementProperties movementProperties, float walkRadius)
+        public RabbitController(Transform transform, MovementProperties movementProperties, float walkRadius) : base(transform, movementProperties)
         {
-            _transform = transform;
-            _movementProperties = movementProperties;
             _walkRadius = walkRadius;
         }
 
         public override void Update()
         {
-            UpdateState(_transform);
-            _transform.position += GetSteeringVelocity(_transform.position) * Time.deltaTime;
+            UpdateState(Transform);
+            Transform.position += GetSteeringVelocity(Transform.position) * Time.deltaTime;
         }
 
         private Vector3 GetSteeringVelocity(Vector3 currentPosition)
@@ -33,10 +29,10 @@ namespace HunterProject.Animals
             switch (CurrentState)
             {
                 case AnimalState.Run:
-                    return GetSteeringVelocity(_movementProperties.RunSpeed, _movementProperties.SlowdownDistance, currentPosition, _targetPosition);
+                    return GetSteeringVelocity(MovementProperties.RunSpeed, MovementProperties.SlowdownDistance, currentPosition, _targetPosition);
 
                 case AnimalState.Walk:
-                    return GetSteeringVelocity(_movementProperties.WalkSpeed, _movementProperties.SlowdownDistance, currentPosition, _movePoint);
+                    return GetSteeringVelocity(MovementProperties.WalkSpeed, MovementProperties.SlowdownDistance, currentPosition, _movePoint);
             }
 
             return Vector3.zero;
@@ -44,7 +40,7 @@ namespace HunterProject.Animals
 
         private void UpdateState(Transform transform)
         {
-            var hits = Physics2D.CircleCastAll(transform.position, _movementProperties.LookRadius, Vector2.zero)
+            var hits = Physics2D.CircleCastAll(transform.position, MovementProperties.LookRadius, Vector2.zero)
                 .Where(hit => hit.transform != transform).Select(hit => hit.point).ToArray();
 
             if (hits.Length == 0)
@@ -54,7 +50,7 @@ namespace HunterProject.Animals
                 return;
             }
             
-            _targetPosition = GetEscapePoint(transform.position, hits, _movementProperties.RunSpeed);
+            _targetPosition = GetEscapePoint(transform.position, hits, MovementProperties.RunSpeed);
             CurrentState = AnimalState.Run;
         }
     }

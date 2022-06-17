@@ -7,8 +7,6 @@ namespace HunterProject.Animals
 {
     public class WolfController : AnimalController
     {
-        private readonly Transform _transform;
-        private readonly MovementProperties _movementProperties;
         private readonly float _walkRadius;
 
         private Vector3 _targetPosition;
@@ -16,17 +14,15 @@ namespace HunterProject.Animals
 
         private const float _BORDER_RESTRICT_DISTANCE_ = 5;
 
-        public WolfController(Transform transform, MovementProperties movementProperties, float walkRadius)
+        public WolfController(Transform transform, MovementProperties movementProperties, float walkRadius): base(transform, movementProperties)
         {
-            _movementProperties = movementProperties;
             _walkRadius = walkRadius;
-            _transform = transform;
         }
         
         public override void Update()
         {
-             UpdateState(_transform);
-             _transform.position += GetSteeringVelocity(_transform.position) * Time.deltaTime;
+             UpdateState(Transform);
+             Transform.position += GetSteeringVelocity(Transform.position) * Time.deltaTime;
         }
 
         private Vector3 GetSteeringVelocity(Vector3 currentPosition)
@@ -35,10 +31,10 @@ namespace HunterProject.Animals
             {
                 case AnimalState.Run:
                     // Debug.DrawLine(currentPosition, _targetPosition, Color.red);
-                    return GetSteeringVelocity(_movementProperties.RunSpeed, _movementProperties.SlowdownDistance, currentPosition, _targetPosition);
+                    return GetSteeringVelocity(MovementProperties.RunSpeed, MovementProperties.SlowdownDistance, currentPosition, _targetPosition);
                 case AnimalState.Walk:
                     // Debug.DrawLine(currentPosition, _movePoint, Color.blue);
-                    return GetSteeringVelocity(_movementProperties.WalkSpeed, _movementProperties.SlowdownDistance, currentPosition, _movePoint);
+                    return GetSteeringVelocity(MovementProperties.WalkSpeed, MovementProperties.SlowdownDistance, currentPosition, _movePoint);
             }
 
             return Vector3.zero;
@@ -48,11 +44,11 @@ namespace HunterProject.Animals
         {
             var currentPosition = (Vector2) transform.position;
 
-            var allHits = Physics2D.CircleCastAll(currentPosition, _movementProperties.LookRadius, Vector2.zero)
+            var allHits = Physics2D.CircleCastAll(currentPosition, MovementProperties.LookRadius, Vector2.zero)
                 .Where(hit => hit.collider.transform != transform).ToArray();
             
             var targetHits = allHits
-                .Where(hit => !hit.collider.CompareTag(Idents._WOLF_TAG) && !hit.collider.CompareTag(Idents._BORDER_TAG))
+                .Where(hit => !hit.collider.CompareTag(Idents.WOLF_TAG) && !hit.collider.CompareTag(Idents.BORDER_TAG))
                 .Select(hit => hit.point).ToArray();
             
             if (targetHits.Length == 0)
@@ -63,12 +59,12 @@ namespace HunterProject.Animals
             }
             
             var escapeHits = Physics2D.CircleCastAll(currentPosition, _BORDER_RESTRICT_DISTANCE_, Vector2.zero)
-                .Where(hit => hit.collider.CompareTag(Idents._BORDER_TAG)).Select(hit => hit.point).ToArray();
+                .Where(hit => hit.collider.CompareTag(Idents.BORDER_TAG)).Select(hit => hit.point).ToArray();
             
-            var escapeDirection = (GetEscapePoint(currentPosition, escapeHits, _movementProperties.RunSpeed) - currentPosition).normalized;
+            var escapeDirection = (GetEscapePoint(currentPosition, escapeHits, MovementProperties.RunSpeed) - currentPosition).normalized;
             var target = (GetClosestTarget(currentPosition, targetHits) - currentPosition).normalized;
 
-            _targetPosition = currentPosition + (escapeDirection + target).normalized * _movementProperties.RunSpeed;
+            _targetPosition = currentPosition + (escapeDirection + target).normalized * MovementProperties.RunSpeed;
             
             CurrentState = AnimalState.Run;
         }

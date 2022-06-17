@@ -1,4 +1,5 @@
 ﻿using System;
+using HunterProject.Data;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -6,11 +7,17 @@ namespace HunterProject.Gun
 {
     public class Bullet : MonoBehaviour
     {
-        private const string _BORDER_TAG_ = "Border";
-        private const string _PLAYER_TAG_ = "Player";
-
-        [SerializeField] private float _speed;
+        [SerializeField]
+        private float _speed;
+        
         private Vector3 _direction;
+
+        private const float _BULLET_LIFETIME_ = 5f;
+
+        private void Start()
+        {
+            Destroy(gameObject, _BULLET_LIFETIME_);
+        }
 
         private void Update()
         {
@@ -27,22 +34,15 @@ namespace HunterProject.Gun
             _direction = direction;
         }
 
-        // private void OnCollisionEnter2D(Collision2D other)
-        // {
-        //     if (other.gameObject.CompareTag(_BORDER_TAG_) ||
-        //         other.gameObject.CompareTag(_PLAYER_TAG_))
-        //     {
-        //         return;
-        //     }
-        //
-        //     DestroyEnemy(other.gameObject);
-        //     DestroyBullet(gameObject);
-        // }
-
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag(_BORDER_TAG_) ||
-                other.gameObject.CompareTag(_PLAYER_TAG_))
+            if (!gameObject)
+            {
+                return;
+            }
+            
+            if (other.gameObject.CompareTag(Idents.BORDER_TAG) ||
+                other.gameObject.CompareTag(Idents.PLAYER_TAG))
             {
                 return;
             }

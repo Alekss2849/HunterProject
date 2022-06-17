@@ -27,7 +27,7 @@ namespace DefaultNamespace
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(other.gameObject.CompareTag(Idents._WOLF_TAG) || other.gameObject.CompareTag(Idents._BORDER_TAG))
+            if(other.gameObject.CompareTag(Idents.WOLF_TAG) || other.gameObject.CompareTag(Idents.BORDER_TAG))
             {
                 return;
             }

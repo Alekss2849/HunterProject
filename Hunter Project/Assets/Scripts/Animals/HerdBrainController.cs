@@ -13,18 +13,14 @@ namespace HunterProject.Animals
         private readonly List<Vector2> _offsets;
         private readonly List<float> _regroupTimers;
 
-        private readonly Transform _transform;
-        private readonly MovementProperties _movementProperties;
         private Vector2 _movePoint;
         private Vector2 _targetPosition;
         private readonly float _walkRadius;
         private readonly float _spawnDistance;
 
-        public HerdBrainController(Transform transform, MovementProperties movementProperties, float walkRadius, float spawnDistance)
+        public HerdBrainController(Transform transform, MovementProperties movementProperties, float walkRadius, float spawnDistance) : base(transform, movementProperties)
         {
-            _transform = transform;
             _spawnDistance = spawnDistance;
-            _movementProperties = movementProperties;
             _walkRadius = walkRadius;
 
             _deers = new List<DeerController>();
@@ -36,9 +32,9 @@ namespace HunterProject.Animals
         {
             for (int i = 0; i < count; i++)
             {
-                Vector2 spawnPos = (Vector2) _transform.position + Random.insideUnitCircle * _spawnDistance;
+                Vector2 spawnPos = (Vector2) Transform.position + Random.insideUnitCircle * _spawnDistance;
                 DeerController deer = Object.Instantiate(prefab, spawnPos, Quaternion.identity).Init();
-                deer.Destroyed += () => _deers.Remove(deer);
+                deer.Destroyed += OnDeerDestroyed;
                 _deers.Add(deer);
                 _offsets.Add(Random.insideUnitCircle * 5);
                 _regroupTimers.Add(Random.Range(3f, 8f));
@@ -47,10 +43,10 @@ namespace HunterProject.Animals
 
         public override void Update()
         {
-            UpdateState(_transform);
-            _transform.position += (Vector3) GetTargetVelocity(_transform.position) * Time.deltaTime;
+            UpdateState(Transform);
+            Transform.position += (Vector3) GetTargetVelocity(Transform.position) * Time.deltaTime;
 
-            Vector2 position = _transform.position;
+            Vector2 position = Transform.position;
 
             switch (CurrentState)
             {
@@ -115,10 +111,10 @@ namespace HunterProject.Animals
             switch (CurrentState)
             {
                 case AnimalState.Run:
-                    return direction * _movementProperties.RunSpeed;
+                    return direction * MovementProperties.RunSpeed;
 
                 case AnimalState.Walk:
-                    return direction * _movementProperties.WalkSpeed;
+                    return direction * MovementProperties.WalkSpeed;
             }
 
             return Vector2.zero;
@@ -126,8 +122,8 @@ namespace HunterProject.Animals
 
         private void UpdateState(Transform transform)
         {
-            Vector2[] hits = Physics2D.CircleCastAll(transform.position, _movementProperties.LookRadius, Vector2.zero)
-                                      .Where(hit => hit.transform != transform && !hit.collider.CompareTag(Idents._RABBIT_TAG) && !hit.collider.CompareTag(Idents._DEER_TAG))
+            Vector2[] hits = Physics2D.CircleCastAll(transform.position, MovementProperties.LookRadius, Vector2.zero)
+                                      .Where(hit => hit.transform != transform && !hit.collider.CompareTag(Idents.RABBIT_TAG) && !hit.collider.CompareTag(Idents.DEER_TAG))
                                       .Select(hit => hit.point)
                                       .ToArray();
 
@@ -140,9 +136,19 @@ namespace HunterProject.Animals
                 return;
             }
 
-            _targetPosition = GetEscapePoint(transform.position, hits, _movementProperties.RunSpeed);
+            _targetPosition = GetEscapePoint(transform.position, hits, MovementProperties.RunSpeed);
             Debug.DrawLine(transform.position, _targetPosition, Color.magenta);
             CurrentState = AnimalState.Run;
+        }
+
+        private void OnDeerDestroyed(DeerController deer)
+        {
+            _deers.Remove(deer);
+
+            if (_deers.Count == 0 && Transform)
+            {
+                Object.Destroy(Transform.gameObject);
+            }
         }
     }
 }
